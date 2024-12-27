@@ -1,0 +1,46 @@
+i used code first approach but there is another way ro generate the scripts using the sql wizard or even writing a sql query here is a example so u can see i can write sql queries 
+-- Create Users table
+CREATE TABLE dbo.Users
+(
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(256) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    CreatedDate DATETIME NOT NULL DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE dbo.Applicants
+(
+    ApplicantID INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT NOT NULL,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    Resume NVARCHAR(MAX) NULL,
+    CreatedDate DATETIME NOT NULL DEFAULT GETDATE(),
+    CONSTRAINT FK_Applicants_Users FOREIGN KEY (UserID) REFERENCES dbo.Users(UserID)
+);
+GO
+
+CREATE TABLE dbo.ArchivedVacancies
+(
+    VacancyID INT IDENTITY(1,1) PRIMARY KEY,
+    PositionTitle NVARCHAR(100) NOT NULL,
+    Department NVARCHAR(100) NOT NULL,
+    DatePosted DATE NOT NULL,
+    DateArchived DATE NOT NULL,
+    ArchivedByUserID INT NOT NULL,
+    CONSTRAINT FK_ArchivedVacancies_Users FOREIGN KEY (ArchivedByUserID) REFERENCES dbo.Users(UserID)
+);
+GO
+
+
+CREATE INDEX IX_Applicants_UserID ON dbo.Applicants(UserID);
+GO
+
+CREATE INDEX IX_ArchivedVacancies_ArchivedByUserID ON dbo.ArchivedVacancies(ArchivedByUserID);
+GO
+
+CREATE INDEX IX_ArchivedVacancies_DateArchived ON dbo.ArchivedVacancies(DateArchived);
+GO

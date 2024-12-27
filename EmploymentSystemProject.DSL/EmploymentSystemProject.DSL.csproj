@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmploymentSystemProject.Entities\EmploymentSystemProject.Entities.csproj" />
+    <ProjectReference Include="..\EmploymentSystemProject.Exceptions\EmploymentSystemProject.Exceptions.csproj" />
+    <ProjectReference Include="..\EmploymentSystemProject.Helpers\EmploymentSystemProject.Helpers.csproj" />
+    <ProjectReference Include="..\EmploymentSystemProject.Repo\EmploymentSystemProject.Repo.csproj" />
+  </ItemGroup>
+
+</Project>
